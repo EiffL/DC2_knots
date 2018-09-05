@@ -24,9 +24,9 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_sims \
     && eups declare -r . sims_GCRCatSimInterface -t current \
     && setup sims_GCRCatSimInterface \
     && chmod a+x bin.src/generateInstCat.py \
-    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.7.0.sims/support_scripts/get_kepler_light_curves.sh \
-    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.7.0.sims/support_scripts/get_kepler_dmag.sh \
-    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.7.0.sims/support_scripts/get_mdwarf_flares.sh
+    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.10.0.sims/support_scripts/get_kepler_light_curves.sh \
+    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.10.0.sims/support_scripts/get_kepler_dmag.sh \
+    && bash /opt/lsst/software/stack/stack/miniconda3-4.3.21-10a4fa6/Linux64/sims_catUtils/2.10.0.sims/support_scripts/get_mdwarf_flares.sh
 
 USER lsst
 
