@@ -20,7 +20,7 @@ RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_sims \
 
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_sims \
     && cd /build && git clone https://github.com/LSSTDESC/sims_GCRCatSimInterface \
-    && cd sims_GCRCatSimInterface && git checkout u/EiffL/gcr_update \
+    && cd sims_GCRCatSimInterface && git checkout master \
     && eups declare -r . sims_GCRCatSimInterface -t current \
     && setup sims_GCRCatSimInterface \
     && chmod a+x bin.src/generateInstCat.py \
