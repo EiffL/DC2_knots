@@ -13,3 +13,6 @@ to run imsim in fast mode:
 ```
 $ shifter --entrypoint --image=docker:eiffl/imsim imsim.py --disable_sensor_model --psf DoubleGaussian --processes=32 phosim_cat_181898.txt
 ```
+
+I'm selecting a few visits in multiple bands with small seeing and deeper 
+fiveSigmaDepth in the create_visit_list.ipynb notebook
