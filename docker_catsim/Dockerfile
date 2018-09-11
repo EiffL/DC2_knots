@@ -8,7 +8,7 @@ RUN mkdir /build
 # Activate the stack environment and install required software
 RUN source /opt/lsst/software/stack/loadLSST.bash && setup lsst_sims \
     && pip install corner h5py \
-    && pip install git+https://github.com/LSSTDESC/gcr-catalogs.git@v0.8.1 \
+    && pip install git+https://github.com/LSSTDESC/gcr-catalogs.git@f6b558b \
     && pip install git+https://github.com/drphilmarshall/OM10.git \
     && pip install git+https://github.com/drphilmarshall/LensPop.git
 
