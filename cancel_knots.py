@@ -72,9 +72,12 @@ def main(in_instcat_disk, in_instcat_knots,
                             magnorm_knots = np.float(tokens_knots[4])
                             total_flux = 10.**(-magnorm_disk/2.5) + 10.**(-magnorm_knots/2.5)
                             knots_flux_ratio = 10.**(-magnorm_knots/2.5) / total_flux
-
+                            
                             # Apply flux cap for large galaxies
                             size = np.float(tokens_disk[13])
+
+                            if size > 2.5:
+                                knots_flux_ratio = clip(knots_flux_ratio,0,0.3)
 
                             magnorm_disk = -2.5*np.log10((1-knots_flux_ratio)*total_flux)
                             magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
