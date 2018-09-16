@@ -80,8 +80,8 @@ def main(in_instcat_disk, in_instcat_knots,
                             magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
 
                             # Update the entry
-                            tokens_disk[4] = str(magnorm_disk)
-                            tokens_knots[4] = str(magnorm_knots)
+                            tokens_disk[4] = ("%.7f"%magnorm_disk).rstrip('0')
+                            tokens_knots[4] = ("%.7f"%magnorm_knots).rstrip('0')
                             line_disk = ' '.join(tokens_disk)
                             line_knots = ' '.join(tokens_knots)
 
