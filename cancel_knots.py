@@ -51,9 +51,9 @@ def main(in_instcat_disk, in_instcat_knots,
     # Use .fopen to read in the command and object lines from the
     # instance catalog.
     count = 0
-    with fopen(in_instcat_disk, mode='rt') as input_disk,
-         fopen(in_instcat_knots, mode='rt') as input_knots,
-         open(out_instcat_disk, 'w') as output_disk,
+    with fopen(in_instcat_disk, mode='rt') as input_disk,  \
+        fopen(in_instcat_knots, mode='rt') as input_knots, \
+         open(out_instcat_disk, 'w') as output_disk, \
          open(out_instcat_knots, 'w') as output_knots:
 
         for line_knots in input_knots:
