@@ -50,44 +50,51 @@ def main(in_instcat_disk, in_instcat_knots,
              out_instcat_disk, out_instcat_knots):
     # Use .fopen to read in the command and object lines from the
     # instance catalog.
-    with fopen(in_instcat_disk, mode='rt') as input_disk:
-        with fopen(in_instcat_knots, mode='rt') as input_knots:
-            with open(out_instcat_disk, 'w') as output_disk:
-                with open(out_instcat_knots, 'w') as output_knots:
-                    for line_disk, line_knots in zip(input_disk,input_knots):
-                        if not line_disk.startswith('#'):
-                            tokens_disk = line_disk.strip().split()
-                            tokens_knots = line_knots.strip().split()
+    with fopen(in_instcat_disk, mode='rt') as input_disk,
+         fopen(in_instcat_knots, mode='rt') as input_knots,
+         open(out_instcat_disk, 'w') as output_disk,
+         open(out_instcat_knots, 'w') as output_knots:
 
-                            # Check the object ids are the same
-                            id_disk = int(tokens_disk[1]) >> 10
-                            id_knots = int(tokens_knots[1]) >> 10
+        for line_knots in input_knots:
+            tokens_knots = line_knots.strip().split()
+            id_knots = int(tokens_knots[1]) >> 10
 
-                            if id_disk != id_knots:
-                                print("ERROR: object ids do not match between input catalogs")
-                                exit(-1)
+            found= False
+            for line_disk in input_disk:
+                tokens_disk = line_disk.strip().split()
+                id_disk = int(tokens_disk[1]) >> 10
 
-                            # Get total flux
-                            magnorm_disk = np.float(tokens_disk[4])
-                            magnorm_knots = np.float(tokens_knots[4])
-                            total_flux = 10.**(-magnorm_disk/2.5) + 10.**(-magnorm_knots/2.5)
-                            knots_flux_ratio = 10.**(-magnorm_knots/2.5) / total_flux
+                if id_disk == id_knots:
+                    found=True
+                    break
+                else:
+                    output_disk.write(line_disk+'\n')
 
-                            # Apply flux cap for large galaxies
-                            size = np.float(tokens_disk[13])
+            if not found:
+                print("ERROR: object ids do not match between input catalogs")
+                exit(-1)
 
-                            magnorm_disk = -2.5*np.log10((1-knots_flux_ratio)*total_flux)
-                            magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
+            # Get total flux
+            magnorm_disk = np.float(tokens_disk[4])
+            magnorm_knots = np.float(tokens_knots[4])
+            total_flux = 10.**(-magnorm_disk/2.5) + 10.**(-magnorm_knots/2.5)
+            knots_flux_ratio = 10.**(-magnorm_knots/2.5) / total_flux
 
-                            # Update the entry
-                            tokens_disk[4] = str(magnorm_disk)
-                            tokens_knots[4] = str(magnorm_knots)
-                            line_disk = ' '.join(token_disk)
-                            line_knots = ' '.join(token_knots)
+            # Apply flux cap for large galaxies
+            size = np.float(tokens_disk[13])
 
-                        # Write
-                        output_disk.write(line_disk+'\n')
-                        output_knots.write(line_knots+'\n')
+            magnorm_disk = -2.5*np.log10((1-knots_flux_ratio)*total_flux)
+            magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
+
+            # Update the entry
+            tokens_disk[4] = str(magnorm_disk)
+            tokens_knots[4] = str(magnorm_knots)
+            line_disk = ' '.join(token_disk)
+            line_knots = ' '.join(token_knots)
+
+            # Write
+            output_disk.write(line_disk+'\n')
+            output_knots.write(line_knots+'\n')
 
 if __name__ == '__main__':
 
