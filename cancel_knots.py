@@ -97,8 +97,8 @@ def main(in_instcat_disk, in_instcat_knots,
             # Update the entry
             tokens_disk[4] = ("%.7f"%magnorm_disk).rstrip('0')
             tokens_knots[4] = ("%.7f"%magnorm_knots).rstrip('0')
-            line_disk = ' '.join(token_disk)
-            line_knots = ' '.join(token_knots)
+            line_disk = ' '.join(tokens_disk)
+            line_knots = ' '.join(tokens_knots)
 
             # Write
             output_disk.write(line_disk+'\n')
