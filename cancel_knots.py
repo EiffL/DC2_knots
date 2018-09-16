@@ -100,7 +100,8 @@ def main(in_instcat_disk, in_instcat_knots,
             # Write
             output_disk.write(line_disk+'\n')
             output_knots.write(line_knots+'\n')
-print("Fixed %d galaxies"%count)
+    print("Fixed %d galaxies"%count)
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Knots cancelling script')
