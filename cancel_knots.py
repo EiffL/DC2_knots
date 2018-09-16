@@ -92,9 +92,9 @@ def main(self, in_instcat_disk, in_instcat_knots,
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Knots cancelling script')
-    parser.add_argument('input_disk', type='str')
-    parser.add_argument('input_knots', type='str')
-    parser.add_argument('output_disk', type='str')
-    parser.add_argument('output_knots', type='str')
+    parser.add_argument('input_disk', type=str)
+    parser.add_argument('input_knots', type=str)
+    parser.add_argument('output_disk', type=str)
+    parser.add_argument('output_knots', type=str)
     args = parser.parse_args()
     main(args.input_disk, args.input_knots, args.output_disk, args.output_knots)
