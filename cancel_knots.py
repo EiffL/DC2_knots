@@ -50,6 +50,7 @@ def main(in_instcat_disk, in_instcat_knots,
              out_instcat_disk, out_instcat_knots):
     # Use .fopen to read in the command and object lines from the
     # instance catalog.
+    count = 0
     with fopen(in_instcat_disk, mode='rt') as input_disk:
         with fopen(in_instcat_knots, mode='rt') as input_knots:
             with open(out_instcat_disk, 'w') as output_disk:
@@ -77,7 +78,9 @@ def main(in_instcat_disk, in_instcat_knots,
                             size = np.float(tokens_disk[13])
 
                             if size > 2.5:
-                                knots_flux_ratio = clip(knots_flux_ratio,0,0.3)
+                                knots_flux_ratio = np.clip(knots_flux_ratio,0,0.3)
+                                count+=1
+                                print("Capping knots flux for object %d, with magnorm: %f and size %f"%(id_knots,magnorm_disk,size))
 
                             magnorm_disk = -2.5*np.log10((1-knots_flux_ratio)*total_flux)
                             magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
@@ -91,6 +94,7 @@ def main(in_instcat_disk, in_instcat_knots,
                         # Write
                         output_disk.write(line_disk+'\n')
                         output_knots.write(line_knots+'\n')
+    print("Fixed %d galaxies"%count)
 
 if __name__ == '__main__':
 
