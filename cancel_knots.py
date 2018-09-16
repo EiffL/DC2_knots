@@ -82,9 +82,12 @@ def main(in_instcat_disk, in_instcat_knots,
 
             # Apply flux cap for large galaxies
             size = np.float(tokens_disk[13])
-
             if size > 2.5:
                 knots_flux_ratio = np.clip(knots_flux_ratio,0,0.3)
+                count+=1
+                print("Capping knots flux for object %d, with magnorm: %f and size %f"%(id_knots,magnorm_disk,size))
+            elif size > 1.:
+                knots_flux_ratio = np.clip(knots_flux_ratio,0,0.5)
                 count+=1
                 print("Capping knots flux for object %d, with magnorm: %f and size %f"%(id_knots,magnorm_disk,size))
 
