@@ -86,8 +86,8 @@ def main(in_instcat_disk, in_instcat_knots,
                             line_knots = ' '.join(token_knots)
 
                         # Write
-                        output_disk.write(line_disk)
-                        output_knots.write(line_knots)
+                        output_disk.write(line_disk+'\n')
+                        output_knots.write(line_knots+'\n')
 
 if __name__ == '__main__':
 
