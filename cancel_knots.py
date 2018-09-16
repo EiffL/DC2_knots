@@ -52,7 +52,7 @@ def main(in_instcat_disk, in_instcat_knots,
     # instance catalog.
     count = 0
     with fopen(in_instcat_disk, mode='rt') as input_disk,  \
-        fopen(in_instcat_knots, mode='rt') as input_knots, \
+         fopen(in_instcat_knots, mode='rt') as input_knots, \
          open(out_instcat_disk, 'w') as output_disk, \
          open(out_instcat_knots, 'w') as output_knots:
 
@@ -92,8 +92,8 @@ def main(in_instcat_disk, in_instcat_knots,
             magnorm_knots = -2.5*np.log10(knots_flux_ratio*total_flux)
 
             # Update the entry
-            tokens_disk[4] = str(magnorm_disk)
-            tokens_knots[4] = str(magnorm_knots)
+            tokens_disk[4] = ("%.7f"%magnorm_disk).rstrip('0')
+            tokens_knots[4] = ("%.7f"%magnorm_knots).rstrip('0')
             line_disk = ' '.join(token_disk)
             line_knots = ' '.join(token_knots)
 
