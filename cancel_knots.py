@@ -46,7 +46,7 @@ def fopen_generator(fd, abspath, **kwds):
                     for line in my_input:
                         yield line
 
-def main(self, in_instcat_disk, in_instcat_knots,
+def main(in_instcat_disk, in_instcat_knots,
              out_instcat_disk, out_instcat_knots):
     # Use .fopen to read in the command and object lines from the
     # instance catalog.
